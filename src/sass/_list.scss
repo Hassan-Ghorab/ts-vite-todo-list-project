@@ -1,0 +1,40 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #080e1c;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-block-end: 1rem;
+
+  .task-title-completed {
+    text-decoration: line-through;
+  }
+
+  .list-item__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .list-item__actions-btn {
+    border: 1px solid #fff;
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+
+  .delete-btn {
+    border: 1px solid #dc3545;
+    background-color: #dc3545;
+  }
+
+  .edit-btn {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+  }
+
+  .completed-btn {
+    border: 1px solid #28a745;
+    background-color: #28a745;
+  }
+}

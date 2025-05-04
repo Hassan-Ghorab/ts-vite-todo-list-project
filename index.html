@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskfiy</title>
+  </head>
+  <body>
+    <main class="main">
+      <header class="header">
+        <h1>Taskfiy</h1>
+
+        <button id="open-add-task-modal-btn" class="open-add-task-modal-btn">
+          <svg
+            fill="currentColor"
+            viewBox="1 1 21 21"
+            height="1.5rem"
+            width="1.5rem"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" />
+          </svg>
+        </button>
+      </header>
+
+      <ul id="list" class="list">
+        <li class="list-item">
+          <h2>task title</h2>
+          <div class="list-item__actions">
+            <button class="list-item__actions-btn delete-btn">
+              <svg
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                height="1rem"
+                width="1rem"
+              >
+                <path
+                  d="
+                  M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 
+                  1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 
+                  0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5v7a.5.5 0 01-1 0v-7a.5.5 0 011 0z
+                  "
+                />
+              </svg>
+            </button>
+
+            <button class="list-item__actions-btn edit-btn">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                height="1rem"
+                width="1rem"
+              >
+                <path
+                  d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
+                />
+              </svg>
+            </button>
+
+            <button class="list-item__actions-btn">
+              <svg
+                viewBox="0 0 512 512"
+                fill="currentColor"
+                height="1rem"
+                width="1rem"
+              >
+                <path
+                  d="
+                  M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 
+                  12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 
+                  0-45.3s32.8-12.5 45.3 0L192 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z
+                  "
+                />
+              </svg>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+    <aside id="modal" class="display-none modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 id="modal-title" class="modal-title">ADD NEW TASK</h2>
+          <button id="close-modal-btn" class="close-modal-btn">
+            <svg fill="none" viewBox="0 0 15 15" height="1.5rem" width="1.5rem">
+              <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M12.854 2.854a.5.5 0 00-.708-.708L7.5 6.793 2.854 2.146a.5.5 0 10-.708.708L6.793 7.5l-4.647 4.646a.5.5 0 00.708.708L7.5 8.207l4.646 4.647a.5.5 0 00.708-.708L8.207 7.5l4.647-4.646z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+        <form class="form" id="new-task-form">
+          <input
+            type="text"
+            id="new-task-title-input"
+            class="input-text"
+            placeholder="Task Title..."
+          />
+          <input
+            type="text"
+            id="new-task-details-input"
+            class="input-text"
+            placeholder="Task Details..."
+          />
+          <button id="submit" type="submit" class="submit">Add</button>
+        </form>
+      </div>
+    </aside>
+
+    <aside id="delete-modal" class="display-none delete-modal">
+      <div class="delete-modal-container">
+        <div class="modal-header">
+          <h2>Are you sure you want to remove this task?</h2>
+          <button id="close-delete-modal-btn" class="close-modal-btn">
+            <svg fill="none" viewBox="0 0 15 15" height="1.5rem" width="1.5rem">
+              <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M12.854 2.854a.5.5 0 00-.708-.708L7.5 6.793 2.854 2.146a.5.5 0 10-.708.708L6.793 7.5l-4.647 4.646a.5.5 0 00.708.708L7.5 8.207l4.646 4.647a.5.5 0 00.708-.708L8.207 7.5l4.647-4.646z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+        <p>
+          Deleting this task will remove it permanently from your inventory. Any
+          associated data, sales history, and other related information will
+          also be deleted. Please make sure this is the intended action."
+        </p>
+        <div>
+          <button id="delete-task-btn">Delete</button>
+          <button id="cancel-btn" class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </aside>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

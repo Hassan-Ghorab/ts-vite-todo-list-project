@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 50px;
+  }
+
+  .open-add-task-modal-btn {
+    border: 1px solid #fff;
+    padding: 0.3rem;
+    border-radius: 5px;
+  }
+}
