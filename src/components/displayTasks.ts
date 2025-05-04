@@ -1,5 +1,5 @@
 import { INewTaskObject } from "../interfaces";
-import { isEditing, setIsEditing } from "../components/modal";
+import { setIsEditing } from "../components/modal";
 import { completeTask } from "./completeTask";
 import { deleteTask } from "./deleteTask";
 import { openDeleteModal, openModal, updateModalTitle } from "./modal";
@@ -8,13 +8,11 @@ import { editTask } from "./addTask";
 const list = document.getElementById("list") as HTMLUListElement | null;
 
 export function displayTasks(tasksArray: INewTaskObject[]) {
-  // Clear the current list before rendering new tasks
-  if (list) {
-    list.innerHTML = ""; // Optional: clear previous tasks to avoid duplication
-  }
+  if (!list) return; // Ensure list element exists before proceeding
+
+  list.innerHTML = ""; // Clear the list before rendering new tasks
 
   if (tasksArray.length > 0) {
-    // Generate the HTML string for each task
     const tasksHTML = tasksArray
       .map((task) => {
         return `
@@ -56,28 +54,27 @@ export function displayTasks(tasksArray: INewTaskObject[]) {
       })
       .join("");
 
-    if (list) {
-      list.innerHTML = tasksHTML;
-    }
-  } else {
-    if (list) {
-      list.innerHTML = `
-        <li class="list-item no-items">
-          <h2>No items yet</h2>
-        </li>
-      `;
-    }
-  }
+    list.innerHTML = tasksHTML;
 
+    // Attach event listeners after rendering
+    attachEventListeners();
+  } else {
+    list.innerHTML = `
+      <li class="list-item no-items">
+        <h2>No items yet</h2>
+      </li>
+    `;
+  }
+}
+
+function attachEventListeners() {
   const completeBtn = document.querySelectorAll(".complete-btn");
   completeBtn.forEach((button) => {
     button.addEventListener("click", (e) => {
       const taskId = (e.currentTarget as HTMLElement).getAttribute(
         "data-task-id"
       );
-      if (taskId) {
-        completeTask(taskId);
-      }
+      if (taskId) completeTask(taskId);
     });
   });
 
@@ -87,12 +84,9 @@ export function displayTasks(tasksArray: INewTaskObject[]) {
       const taskId = (e.currentTarget as HTMLElement).getAttribute(
         "data-task-id"
       );
-
-      if (taskId !== null) {
+      if (taskId) {
         openDeleteModal();
         deleteTask(taskId);
-      } else {
-        console.error("Task ID is missing!");
       }
     });
   });
@@ -103,15 +97,11 @@ export function displayTasks(tasksArray: INewTaskObject[]) {
       const taskId = (e.currentTarget as HTMLElement).getAttribute(
         "data-task-id"
       );
-
-      setIsEditing(true); // Set isEditing to true
-
-      updateModalTitle(); // Update modal title after opening the modal
-      if (taskId !== null) {
-        openModal(); // Open the modal
+      if (taskId) {
+        setIsEditing(true);
+        updateModalTitle();
+        openModal();
         editTask(taskId);
-      } else {
-        console.error("Task ID is missing!");
       }
     });
   });
